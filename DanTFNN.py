@@ -1,4 +1,5 @@
 import tensorflow as tf
+import os
 
 class TFReadyData():
 
@@ -106,12 +107,28 @@ class DanTFnet():
 		return tf.argmax(tf.add( tf.matmul(y_list[-1], self.W_list[-1]), self.B_list[-1] ),1)
 
 
-	def SaveSess(self,save_path):
+	def SaveSess(self,session_name):
+		cwd = os.getcwd()
+		sessions_dir = os.path.join(cwd,"sessions")
+		session_dir = os.path.join(sessions_dir,session_name)
+		
+		if not os.path.exists(session_dir):
+			os.makedirs(session_dir)
+
+		save_path = os.path.join(session_dir,session_name+".ckpt")
 		self.saver.save(self.sess, save_path)
 
 
-	def LoadSess(self,load_path):
-		self.saver.restore(self.sess, load_path)
+	def LoadSess(self,session_name):
+		cwd = os.getcwd()
+		sessions_dir = os.path.join(cwd,"sessions")
+		session_dir = os.path.join(sessions_dir,session_name)
+		load_path = os.path.join(session_dir,session_name+".ckpt")
+		
+		if(not os.path.exists(session_dir)):
+			print("Session checkpoint not found")
+		else:
+			self.saver.restore(self.sess, load_path)
 
 
 
