@@ -1,7 +1,7 @@
 from DanTFNN import DanTFnet
 from DanTFNN import MnistData
 from tensorflow.examples.tutorials.mnist import input_data
-import os
+
 
 mnist = input_data.read_data_sets("/mnist/", one_hot=True)
 mnist_data = MnistData(mnist)

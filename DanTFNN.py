@@ -1,6 +1,8 @@
 import tensorflow as tf
 import os
 
+
+
 class TFReadyData():
 
 	def __init__(self,data):
